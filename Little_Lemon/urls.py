@@ -4,5 +4,5 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('Resturant.urls')),         # للصفحة الرئيسية أو واجهة الموقع
-    path('api/', include('Resturant.api_urls')), # للـ API بشكل مرتب
+
 ]
