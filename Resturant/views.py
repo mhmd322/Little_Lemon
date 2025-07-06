@@ -2,8 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from datetime import datetime
 from rest_framework import viewsets
-from .models import Menu, Booking
-from .serializers import MenuSerializer, BookingSerializer
+from .models import Menu, Booking,MenuItem
+from .serializers import MenuSerializer, BookingSerializer,MenuItemSerializer
 
 class MenuViewSet(viewsets.ModelViewSet):
     queryset = Menu.objects.all()
@@ -12,6 +12,10 @@ class MenuViewSet(viewsets.ModelViewSet):
 class BookingViewSet(viewsets.ModelViewSet):
     queryset = Booking.objects.all()
     serializer_class = BookingSerializer
+
+class MenuItemViewSet(viewsets.ModelViewSet):
+    queryset= MenuItem.objects.all()
+    serializer_class= MenuItemSerializer
 
 
 def index(request):
