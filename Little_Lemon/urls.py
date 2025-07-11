@@ -6,4 +6,5 @@ urlpatterns = [
     path('', include('Resturant.urls')),         # للصفحة الرئيسية أو واجهة الموقع
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.authtoken')),
+    path('accounts/', include('accounts.urls')),
 ]
