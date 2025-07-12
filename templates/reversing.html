@@ -5,10 +5,14 @@
 {% if bookings %}
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
     {% for booking in bookings %}
-      <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200 hover:shadow-xl transition" data-aos="fade-up">
+      <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200 hover:shadow-xl transition relative" data-aos="fade-up">
         <h3 class="text-xl font-semibold text-gray-800 mb-2">🧾 {{ booking.name }}</h3>
         <p class="text-sm text-gray-600">👥 عدد الضيوف: {{ booking.no_of_guests }}</p>
         <p class="text-sm text-gray-600">📅 التاريخ: {{ booking.booking_date|date:"d/m/Y" }}</p>
+        <form action="{% url 'delete_booking' booking.id %}" method="post" class="absolute top-2 right-2">
+          {% csrf_token %}
+          <button type="submit" class="text-red-600 hover:text-red-800 text-xs">🗑 حذف</button>
+        </form>
       </div>
     {% endfor %}
   </div>
@@ -16,4 +20,3 @@
   <p class="text-center text-gray-500 text-lg">لا توجد حجوزات حالياً.</p>
 {% endif %}
 {% endblock %}
-
