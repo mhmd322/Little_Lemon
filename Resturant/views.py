@@ -4,6 +4,11 @@ from datetime import datetime
 from rest_framework import viewsets
 from .models import Menu, Booking,MenuItem
 from .serializers import MenuSerializer, BookingSerializer,MenuItemSerializer
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from .forms import BookingForm
+
 
 class MenuViewSet(viewsets.ModelViewSet):
     queryset = Menu.objects.all()
@@ -18,11 +23,6 @@ class MenuItemViewSet(viewsets.ModelViewSet):
     serializer_class= MenuItemSerializer
 
 
-from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
-from django.contrib import messages
-from .models import Booking, Menu
-from .forms import BookingForm
 
 
 def home(request):
@@ -32,7 +32,8 @@ def menu(request):
     menu_items = Menu.objects.all()
     return render(request, 'menu.html', {'menu_items': menu_items})
 
-@login_required
+
+@login_required(login_url='/accounts/login/')
 def booking(request):
     if request.method == 'POST':
         form = BookingForm(request.POST)
@@ -40,18 +41,18 @@ def booking(request):
             booking = form.save(commit=False)
             booking.user = request.user
             booking.save()
-            messages.success(request, 'تم الحجز بنجاح ✅')
-            return redirect('reversing')
+            messages.success(request, "✅ تم تأكيد الحجز بنجاح!")
+            return redirect('/')
     else:
         form = BookingForm()
     return render(request, 'booking.html', {'form': form})
 
-@login_required
+@login_required(login_url='/accounts/login/')
 def reversing(request):
-    bookings = Booking.objects.filter(user=request.user)
+    bookings = Booking.objects.filter(user=request.user)  # ✅ عرض حجوزات المستخدم فقط
     return render(request, 'reversing.html', {'bookings': bookings})
 
-@login_required
+@login_required(login_url='/accounts/login/')
 def delete_booking(request, booking_id):
     if request.method == 'POST':
         booking = Booking.objects.filter(id=booking_id, user=request.user).first()

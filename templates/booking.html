@@ -8,17 +8,17 @@
 
     <div>
       <label class="block mb-1 text-gray-700 font-medium">الاسم الكامل:</label>
-      {{ form.name|as_widget(attrs={'class': 'w-full p-3 border border-gray-300 rounded-md shadow-sm'}) }}
+      {{ form.name }}
     </div>
 
     <div>
       <label class="block mb-1 text-gray-700 font-medium">عدد الضيوف:</label>
-      {{ form.no_of_guests|as_widget(attrs={'class': 'w-full p-3 border border-gray-300 rounded-md shadow-sm'}) }}
+      {{ form.no_of_guests }}
     </div>
 
     <div>
       <label class="block mb-1 text-gray-700 font-medium">تاريخ الحجز:</label>
-      {{ form.booking_date|as_widget(attrs={'class': 'w-full p-3 border border-gray-300 rounded-md shadow-sm'}) }}
+      {{ form.booking_date }}
     </div>
 
     <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-md transition-all">
@@ -26,3 +26,5 @@
     </button>
   </form>
 </section>
+{% endblock %}
+

@@ -24,7 +24,10 @@
       <a href="/reversing/" class="hover:underline text-sm">حجوزاتي</a>
       {% if user.is_authenticated %}
         <span class="text-sm text-gray-600">👤 {{ user.username }}</span>
-        <a href="/accounts/logout/" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm">تسجيل الخروج</a>
+        <form method="post" action="{% url 'logout' %}" class="inline">
+          {% csrf_token %}
+          <button type="submit" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm">تسجيل الخروج</button>
+        </form>
       {% else %}
         <a href="/accounts/login/" class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded text-sm">دخول</a>
         <a href="/accounts/register/" class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm">تسجيل</a>
@@ -33,13 +36,13 @@
   </header>
 
   {% if messages %}
-    <div class="p-4" data-aos="fade-in">
-      {% for message in messages %}
-        <div class="mb-2 p-3 rounded-lg bg-green-100 border border-green-300 text-green-800 animate-pulse">
-          {{ message }}
-        </div>
-      {% endfor %}
-    </div>
+  <div class="fixed top-4 right-4 z-50">
+    {% for message in messages %}
+      <div class="mb-2 p-4 bg-green-100 border border-green-300 text-green-800 rounded-xl shadow-md animate-fade-in">
+        {{ message }}
+      </div>
+    {% endfor %}
+  </div>
   {% endif %}
 
   <main class="p-6">
@@ -47,8 +50,8 @@
   </main>
 
   <footer class="bg-white mt-12 border-t p-6 text-center text-sm text-gray-600" data-aos="fade-up">
-    <p>جميع الحقوق محفوظة &copy; {{ now|date:"Y" }} | مطعم ليتل ليمون - مصياف</p>
-    <p>📍 الموقع: قلعة مصياف | 📞 الهاتف: 0930242645</p>
+    <p>جميع الحقوق محفوظة &copy; {{ now|date:"Y" }} | مطعم ليتل ليمون - سلطنة عمان</p>
+    <p>📍 الموقع: سلطنة عمان | 📞 الهاتف: 0930242645</p>
   </footer>
 </body>
 </html>

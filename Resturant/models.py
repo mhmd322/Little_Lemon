@@ -2,14 +2,21 @@
 # Create your models here.
 from django.db import models
 
+from django.db import models
+from django.contrib.auth.models import User
+
+from django.db import models
+from django.contrib.auth.models import User
+
 class Booking(models.Model):
-    id = models.AutoField(primary_key=True)   # معرف تلقائي كـ مفتاح أساسي
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
-    no_of_guests = models.PositiveIntegerField()
+    no_of_guests = models.IntegerField()
     booking_date = models.DateField()
 
     def __str__(self):
         return f"{self.name} - {self.booking_date}"
+
 
 
 class Menu(models.Model):

@@ -21,3 +21,4 @@ class RegisterView(CreateView):
         user = form.save()
         login(self.request, user)
         return redirect('/')
+
